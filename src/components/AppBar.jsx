@@ -85,6 +85,7 @@ export default function SearchAppBar() {
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                         onClick={handleMenuOpen}
+
                     >
                         <MenuIcon />
                     </IconButton>
