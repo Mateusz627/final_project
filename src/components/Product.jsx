@@ -7,21 +7,23 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
+import imagePlaceholder from "../assets/david_beckham.jpg";
+
 export default function MediaCard({ name, description, image, price }) {
     return (
-        <Card sx={{ maxWidth: 345 }} className="media-card">
+        <Card sx={{ maxWidth: 345, flexGrow: 1, width: "100%" }} className="media-card">
             <CardMedia
-                sx={{ height: 140 }}
-                image={image}
-                title="Product Image"
+                sx={{ height: 150 }}
+                image={imagePlaceholder}
+                title={name}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {description}
-                </Typography>
+                {/*<Typography variant="body2" color="text.secondary">*/}
+                {/*    {description}*/}
+                {/*</Typography>*/}
                 <Typography variant="body2" color="text.secondary">
                     Price: {price}
                 </Typography>

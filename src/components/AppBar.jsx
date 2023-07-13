@@ -76,7 +76,7 @@ export default function SearchAppBar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: 'green' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -90,7 +90,8 @@ export default function SearchAppBar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography
-                        variant="h6"
+                        variant="h4"
+                        color="white"
                         noWrap
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
@@ -117,8 +118,9 @@ export default function SearchAppBar() {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
+
             >
-                <MenuItem onClick={handleMenuClose}>Nowości</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Dodaj nowy produkt</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Promocje</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Produkty</MenuItem>
             </Menu>
