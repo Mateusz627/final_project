@@ -9,6 +9,8 @@ import AppBar from '@mui/material/AppBar';
 import imageSrc from './assets/blog1.jpg';
 import imageSrc2 from './assets/blog2.jpg';
 import imageSrc3 from './assets/blog3.jpg';
+import FormFloatingTextareaExample from "./components/Form.jsx"
+import Button from 'react-bootstrap/Button';
 
 
 const supabaseUrl = 'https://kaavkvsfytaancvipvbr.supabase.co';
@@ -76,11 +78,42 @@ function App() {
                 </div>
             </div>
 
-            <div>
+            <div className="form">
                 <h4>Kontakt z nami</h4>
+                <FormFloatingTextareaExample/>
+                <Button variant="success" style={{margin: '30px', fontSize: '20px'}}>Wyślij</Button>{' '}
             </div>
 
-            <footer>Footer</footer>
+            <footer>
+                <div className="information">
+                    <div>
+                        <h4>INFORMACJE</h4>
+                        <p>Polityka prywatności</p>
+                        <p>Regulamin sklepu</p>
+                        <p>Sklepy stacjonarne</p>
+                        <p>Oferty Pracy</p>
+                    </div>
+
+                    <div className='client-content'>
+                        <h4>OBSŁUGA KLIENTA</h4>
+                        <p>Formy płatności</p>
+                        <p>Formy i koszty dostawy</p>
+                        <p>Zwrot i wymiana towaru</p>
+                        <p>Reklamacje</p>
+                    </div>
+
+                    <div>
+                        <h4>TWOJE KONTO</h4>
+                        <p>Rejestracja</p>
+                        <p>Logowanie</p>
+                        <p>Przypomnij hasło</p>
+                        <p>Twoje konto</p>
+                    </div>
+                </div>
+                <div>
+                    <h6>© 2023 Mbiotica Mateusz Siuda</h6>
+                </div>
+            </footer>
         </>
     );
 }
