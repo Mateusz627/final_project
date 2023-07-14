@@ -11,7 +11,7 @@ import imageSrc2 from './assets/blog2.jpg';
 import imageSrc3 from './assets/blog3.jpg';
 import FormFloatingTextareaExample from "./components/Form.jsx"
 import Button from 'react-bootstrap/Button';
-import { BrowserRouter } from "react-router-dom";
+import SearchAppBar from "./components/AppBar.jsx";
 
 
 const supabaseUrl = 'https://kaavkvsfytaancvipvbr.supabase.co';
@@ -32,7 +32,8 @@ function App() {
 
     return (
         <>
-                <CustomAppBar />
+            <SearchAppBar/>
+                {/*<CustomAppBar />*/}
             <ControlledCarousel />
 
             <div className="products-heading">

@@ -36,6 +36,7 @@ function AddProduct() {
     }
 
     return (
+        <h1>Dodaj produkt </h1>
         <Grid item xs={12} md={8}>
             <Typography sx={{ mb: 3 }} variant="h2" component="h1">
                 Add new product

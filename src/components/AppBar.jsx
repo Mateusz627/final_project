@@ -12,6 +12,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Routes, Route } from "react-router-dom";
+import App from "../App.jsx";
+import AddProduct from "./AddProducts.jsx";
+import Home from "../pages/Home.jsx";
+import { Link } from "react-router-dom";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -75,8 +80,10 @@ export default function SearchAppBar() {
     }));
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: 'green' }}>
+        <Box position="sticky" top="0" z-index={999999} sx={{ flexGrow: 1}}>
+
+
+            <AppBar position="static"  sx={{ backgroundColor: 'green' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -120,9 +127,11 @@ export default function SearchAppBar() {
                 onClose={handleMenuClose}
 
             >
-                <MenuItem onClick={handleMenuClose}>Dodaj nowy produkt</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Promocje</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Produkty</MenuItem>
+
+                   <MenuItem><Link to='/add-product'>Dodaj nowy produkt</Link></MenuItem>
+                   <MenuItem onClick={handleMenuClose}>Promocje</MenuItem>
+                    <MenuItem onClick={handleMenuClose}>Produkty</MenuItem>
+
             </Menu>
         </Box>
     );
