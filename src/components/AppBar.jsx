@@ -80,7 +80,7 @@ export default function SearchAppBar() {
     }));
 
     return (
-        <Box position="sticky" top="0" z-index={999999} sx={{ flexGrow: 1}}>
+        <Box position="static" sx={{ flexGrow: 1}}>
 
 
             <AppBar position="static"  sx={{ backgroundColor: 'green' }}>
@@ -128,7 +128,7 @@ export default function SearchAppBar() {
 
             >
 
-                   <MenuItem><Link to='/add-product'>Dodaj nowy produkt</Link></MenuItem>
+                   <MenuItem><Link to='/add-product' style={{color: "black", textDecoration: "none"}}>Dodaj nowy produkt</Link></MenuItem>
                    <MenuItem onClick={handleMenuClose}>Promocje</MenuItem>
                     <MenuItem onClick={handleMenuClose}>Produkty</MenuItem>
 

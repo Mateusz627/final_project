@@ -32,6 +32,7 @@ function App() {
 
     return (
         <>
+
             <SearchAppBar/>
                 {/*<CustomAppBar />*/}
             <ControlledCarousel />
