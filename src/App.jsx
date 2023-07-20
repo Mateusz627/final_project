@@ -4,7 +4,7 @@ import ControlledCarousel from "./components/Slider.jsx";
 import MediaCard from "./components/Product.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createClient } from '@supabase/supabase-js';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import imageSrc from './assets/blog1.jpg';
 import imageSrc2 from './assets/blog2.jpg';
@@ -12,7 +12,8 @@ import imageSrc3 from './assets/blog3.jpg';
 import FormFloatingTextareaExample from "./components/Form.jsx"
 import Button from 'react-bootstrap/Button';
 import SearchAppBar from "./components/AppBar.jsx";
-
+import {Provider} from 'react-redux';
+import store from './redux/store.js';
 
 const supabaseUrl = 'https://kaavkvsfytaancvipvbr.supabase.co';
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthYXZrdnNmeXRhYW5jdmlwdmJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODkwNTQ1MDcsImV4cCI6MjAwNDYzMDUwN30.Ms-3PcpWwFmdv2sW83UA6L8Q5kz-CIlimPj-ClD2wvo";
@@ -32,8 +33,9 @@ function App() {
 
     return (
         <>
+            <Provider store={store}>
+                <SearchAppBar/>
 
-            <SearchAppBar/>
                 {/*<CustomAppBar />*/}
             <ControlledCarousel />
 
@@ -49,7 +51,8 @@ function App() {
                         name={product.name}
                         description={product.description}
                         image="../assets/david_beckham.jpg"
-                        price={product.price + "zł"}
+                        price={product.price}
+                        id={product.id}
                     />
                 ))}
             </div>
@@ -114,6 +117,7 @@ function App() {
                     <h6>© 2023 Mbiotica Mateusz Siuda</h6>
                 </div>
             </footer>
+            </Provider>
         </>
     );
 }

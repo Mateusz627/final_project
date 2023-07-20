@@ -17,6 +17,8 @@ import App from "../App.jsx";
 import AddProduct from "./AddProducts.jsx";
 import Home from "../pages/Home.jsx";
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -78,6 +80,9 @@ export default function SearchAppBar() {
             padding: '0 4px',
         },
     }));
+
+    const cart = useSelector(state => state.products.cartItems)
+    console.log(cart)
 
     return (
         <Box position="static" sx={{ flexGrow: 1}}>
