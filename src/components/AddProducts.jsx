@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+
 
 function AddProduct() {
     const [name, setName] = useState("");
@@ -29,6 +31,8 @@ function AddProduct() {
     };
 
     return (
+        <>
+
         <div>
             <h1>Add Product</h1>
             <form onSubmit={handleFormSubmit}>
@@ -53,6 +57,7 @@ function AddProduct() {
                 <button type="submit">Add Product</button>
             </form>
         </div>
+        </>
     );
 }
 

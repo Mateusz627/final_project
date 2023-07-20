@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,12 +13,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Routes, Route } from "react-router-dom";
-import App from "../App.jsx";
-import AddProduct from "./AddProducts.jsx";
-import Home from "../pages/Home.jsx";
-import { Link } from "react-router-dom";
-import {useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from '@mui/material/Button';
+import { removeFromCart } from '../redux/cartSlice';
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -61,8 +61,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchAppBar() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        right: -3,
+        top: 13,
+        border: `2px solid ${theme.palette.background.paper}`,
+        padding: '0 4px',
+    },
+}));
+
+const SearchAppBar = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [show, setShow] = useState(false);
+    const cartItems = useSelector((state) => state.products.cartItems);
+    const totalPrice = Object.values(cartItems).reduce((total, product) => total + product.price * product.quantity, 0);
+
+    const dispatch = useDispatch();
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -72,23 +86,21 @@ export default function SearchAppBar() {
         setAnchorEl(null);
     };
 
-    const StyledBadge = styled(Badge)(({ theme }) => ({
-        '& .MuiBadge-badge': {
-            right: -3,
-            top: 13,
-            border: `2px solid ${theme.palette.background.paper}`,
-            padding: '0 4px',
-        },
-    }));
+    const handleClose = () => {
+        setShow(false);
+    };
 
-    const cart = useSelector(state => state.products.cartItems)
-    console.log(cart)
+    const handleShow = () => {
+        setShow(true);
+    };
+
+    const handleRemoveFromCart = (productId) => {
+        dispatch(removeFromCart(productId));
+    };
 
     return (
-        <Box position="static" sx={{ flexGrow: 1}}>
-
-
-            <AppBar position="static"  sx={{ backgroundColor: 'green' }}>
+        <Box position="static" sx={{ flexGrow: 1 }}>
+            <AppBar position="static" sx={{ backgroundColor: 'green' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -97,7 +109,6 @@ export default function SearchAppBar() {
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                         onClick={handleMenuOpen}
-
                     >
                         <MenuIcon />
                     </IconButton>
@@ -108,7 +119,9 @@ export default function SearchAppBar() {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        Mbiotica
+                        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+                            Mbiotica
+                        </Link>
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
@@ -120,24 +133,33 @@ export default function SearchAppBar() {
                         />
                     </Search>
                     <IconButton aria-label="cart">
-                        <StyledBadge badgeContent={1} color="secondary">
+                        <StyledBadge onClick={handleShow} badgeContent={Object.keys(cartItems).length} color="secondary">
                             <ShoppingCartIcon />
                         </StyledBadge>
                     </IconButton>
+                    <Offcanvas show={show} onHide={handleClose} placement="end">
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title>Twoje zamówienie</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            {Object.keys(cartItems).map((productId) => {
+                                const product = cartItems[productId];
+                                return (
+                                    <div key={productId}>
+                                        <p>Nazwa produktu: {product.name}</p>
+                                        <p>Cena: {product.price}</p>
+                                        <p>Ilość: {product.quantity}</p>
+                                        <Button onClick={() => handleRemoveFromCart(productId)}>Usuń z koszyka</Button>
+                                    </div>
+                                );
+                            })}
+                            <p>Suma całego koszyka: {totalPrice} zł</p>
+                        </Offcanvas.Body>
+                    </Offcanvas>
                 </Toolbar>
             </AppBar>
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-
-            >
-
-                   <MenuItem><Link to='/add-product' style={{color: "black", textDecoration: "none"}}>Dodaj nowy produkt</Link></MenuItem>
-                   <MenuItem onClick={handleMenuClose}>Promocje</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Produkty</MenuItem>
-
-            </Menu>
         </Box>
     );
-}
+};
+
+export default SearchAppBar;
