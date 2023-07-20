@@ -34,9 +34,9 @@ function App() {
     return (
         <>
             <Provider store={store}>
+
                 <SearchAppBar/>
 
-                {/*<CustomAppBar />*/}
             <ControlledCarousel />
 
             <div className="products-heading">
@@ -50,7 +50,7 @@ function App() {
                         className="media-card"
                         name={product.name}
                         description={product.description}
-                        image="../assets/david_beckham.jpg"
+                        image={product.image}
                         price={product.price}
                         id={product.id}
                     />

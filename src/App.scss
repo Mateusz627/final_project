@@ -1,25 +1,35 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.products-heading{
+/* Zapytanie media dla małych ekranów */
+@media screen and (max-width: 600px) {
+    /* Inne style dla małych ekranów */
+
+    footer {
+        padding: 20px 10px; /* Dodaj wewnętrzny padding: góra/dół: 20px, lewo/prawo: 10px */
+    }
+
+    .information {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+    }
+}
+
+.products-heading {
     display: flex;
     justify-content: center;
     padding: 20px;
-
-    h2{
-        font-size: 2rem;
-    }
 }
+
 .product-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-
-
 
     .media-card {
         display: flex;
@@ -31,14 +41,13 @@
         margin: 10px;
         height: 400px;
 
-        .img{
+        .img {
             width: 100%;
             height: 40%;
             background-position: center;
             background-size: contain;
         }
     }
-
 }
 
 .articles {
@@ -47,17 +56,18 @@
     justify-content: center;
     align-items: center;
 
-    .article{
+    .article {
         width: 80%;
         display: flex;
         padding-top: 30px;
 
-        img{
-            width: 70%; // Rozciągnięcie zdjęcia na całą szerokość diva
-            height: 100%; // Rozciągnięcie zdjęcia na całą wysokość diva
+        img {
+            width: 70%; /* Rozciągnięcie zdjęcia na całą szerokość diva */
+            height: 100%; /* Rozciągnięcie zdjęcia na całą wysokość diva */
             object-fit: cover;
         }
-        .text-article{
+
+        .text-article {
             background-color: white;
             position: relative;
             top: 0;
@@ -66,7 +76,7 @@
     }
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,28 +85,34 @@
     padding-top: 50px;
 }
 
-footer{
+footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 300px;
     background-color: green;
+    padding: 20px; /* Dodaj zewnętrzny padding: 20px */
 
-    p{
+    p {
         cursor: pointer;
         text-decoration: none;
         transition: text-decoration 0.5s ease-out;
     }
-    p:hover{
+
+    p:hover {
         text-decoration: underline;
     }
-    .information{
+
+    .information {
         display: flex;
         justify-content: space-around;
         width: 100%;
         padding-top: 30px;
     }
 
+    /* Dodaj reguły dla treści wewnątrz sekcji information */
+    .information > div {
+        margin: 5px; /* Dodaj margines między elementami informacyjnymi */
+    }
 }

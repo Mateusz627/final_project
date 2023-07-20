@@ -146,6 +146,7 @@ const SearchAppBar = () => {
                                 const product = cartItems[productId];
                                 return (
                                     <div key={productId}>
+                                        <img src={product.image} alt="" style ={{width: "160px", height: "160px"}}/>
                                         <p>Nazwa produktu: {product.name}</p>
                                         <p>Cena: {product.price}</p>
                                         <p>Ilość: {product.quantity}</p>
