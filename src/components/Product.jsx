@@ -50,7 +50,7 @@ export default function MediaCard({ name, description, image, price, id }) {
                     {name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Price: {price}
+                    Cena: {price} zł
                 </Typography>
             </CardContent>
             <CardActions>

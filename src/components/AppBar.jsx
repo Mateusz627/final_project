@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -9,16 +9,14 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from '@mui/material/Button';
 import { removeFromCart } from '../redux/cartSlice';
-
-
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -70,20 +68,32 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
+const subcategories = [
+    { label: 'Dodaj produkt', link: "/add-product" },
+    { label: 'Produkty', link: '/products' },
+    { label: 'Logowanie', link: '/login' },
+
+];
+
 const SearchAppBar = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
+
     const [show, setShow] = useState(false);
     const cartItems = useSelector((state) => state.products.cartItems);
     const totalPrice = Object.values(cartItems).reduce((total, product) => total + product.price * product.quantity, 0);
 
     const dispatch = useDispatch();
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+
     const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+        setIsMenuOpen(true);
+        setMenuAnchorEl(event.currentTarget);
     };
 
     const handleMenuClose = () => {
-        setAnchorEl(null);
+        setIsMenuOpen(false);
+        setMenuAnchorEl(null);
     };
 
     const handleClose = () => {
@@ -146,9 +156,9 @@ const SearchAppBar = () => {
                                 const product = cartItems[productId];
                                 return (
                                     <div key={productId}>
-                                        <img src={product.image} alt="" style ={{width: "160px", height: "160px"}}/>
+                                        <img src={product.image} alt="" style={{ width: "160px", height: "160px" }} />
                                         <p>Nazwa produktu: {product.name}</p>
-                                        <p>Cena: {product.price}</p>
+                                        <p>Cena: {product.price} zł</p>
                                         <p>Ilość: {product.quantity}</p>
                                         <Button onClick={() => handleRemoveFromCart(productId)}>Usuń z koszyka</Button>
                                     </div>
@@ -159,6 +169,22 @@ const SearchAppBar = () => {
                     </Offcanvas>
                 </Toolbar>
             </AppBar>
+            <Menu
+                anchorEl={menuAnchorEl}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+            >
+                {subcategories.map((subcategory) => (
+                    <MenuItem
+                        key={subcategory.label}
+                        component={Link}
+                        to={subcategory.link}
+                        onClick={handleMenuClose}
+                    >
+                        {subcategory.label}
+                    </MenuItem>
+                ))}
+            </Menu>
         </Box>
     );
 };

@@ -16,6 +16,7 @@ function FormFloatingTextareaExample() {
                 <Form.Control
                     as="textarea"
                     placeholder="Leave a comment here"
+                    className="mb-4"
                     style={{ height: '100px', width: '600px', resize: 'none',border: '1px solid green' }}
                 />
             </FloatingLabel>
