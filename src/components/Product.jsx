@@ -58,7 +58,7 @@ export default function MediaCard({ name, description, image, price, id }) {
                     <Button onClick={() => handleAddToCart({ name, price, description, image, id })} size="small">
                         Dodaj do koszyka
                     </Button>
-                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                             Produkt został dodany do koszyka!
                         </Alert>

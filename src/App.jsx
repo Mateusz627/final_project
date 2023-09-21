@@ -1,11 +1,9 @@
 import './App.scss';
-import CustomAppBar from "./components/AppBar.jsx";
 import ControlledCarousel from "./components/Slider.jsx";
 import MediaCard from "./components/Product.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createClient } from '@supabase/supabase-js';
-import React, { useEffect, useState } from "react";
-import AppBar from '@mui/material/AppBar';
+import { useEffect, useState } from "react";
 import imageSrc from './assets/blog1.jpg';
 import imageSrc2 from './assets/blog2.jpg';
 import imageSrc3 from './assets/blog3.jpg';
